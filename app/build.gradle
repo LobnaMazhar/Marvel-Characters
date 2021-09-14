@@ -96,4 +96,7 @@ dependencies {
 
     // Lottie
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    // Rounded Imageview
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }

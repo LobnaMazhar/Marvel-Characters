@@ -10,6 +10,7 @@ import kotlin.text.Charsets.UTF_8
 object MyRetrofitClient {
 
     const val BASE_URL = "https://gateway.marvel.com/v1/public/"
+    const val PAGE_SIZE = 10
 
     internal var gson = GsonBuilder()
         .setLenient()
@@ -26,6 +27,7 @@ object MyRetrofitClient {
 
     fun makeHashString(ts: String): String =
         ts + BuildConfig.MARVEL_PRIVATE_KEY + BuildConfig.MARVEL_PUBLIC_KEY
+
     fun String.toMD5(): ByteArray = MessageDigest.getInstance("MD5").digest(toByteArray(UTF_8))
     fun ByteArray.toHex() = joinToString(separator = "") { byte -> "%02x".format(byte) }
 }

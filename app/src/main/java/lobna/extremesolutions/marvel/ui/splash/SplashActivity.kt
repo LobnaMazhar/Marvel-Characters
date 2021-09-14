@@ -25,6 +25,6 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             IntentClass.goToActivity(this, HomeActivity::class.java, clear = true)
-        }, 2000)
+        }, 3000)
     }
 }

@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import lobna.extremesolutions.marvel.R
 
 
