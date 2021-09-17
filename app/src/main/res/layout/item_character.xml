@@ -17,7 +17,6 @@
         android:layout_marginTop="@dimen/margin_padding_size_small"
         android:layout_marginEnd="@dimen/margin_padding_size_medium"
         android:layout_marginBottom="@dimen/margin_padding_size_small"
-        android:onClick="@{civm::onClick}"
         app:cardCornerRadius="20dp">
 
         <FrameLayout
@@ -25,12 +24,14 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/character_image"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 loadImage:url="@{civm.item.thumbnail.imageUrl}" />
 
             <TextView
+                android:id="@+id/character_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"

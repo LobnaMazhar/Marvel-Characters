@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import lobna.extremesolutions.marvel.data.CharacterModel
 import lobna.extremesolutions.marvel.databinding.ActivityDetailsBinding
 
 class DetailsActivity : AppCompatActivity() {
@@ -17,15 +18,22 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val activityDetailsBinding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(activityDetailsBinding.root)
+        supportPostponeEnterTransition()
 
         activityDetailsBinding.dvm = detailsViewModel
 
         val bundle = intent.getBundleExtra("data")
-        detailsViewModel.init(bundle)
+        bundle?.run {
+            val character = getParcelable<CharacterModel>("character")
+            activityDetailsBinding.characterImage.transitionName = character?.thumbnail?.imageUrl
+            activityDetailsBinding.characterName.transitionName = character?.name
+            detailsViewModel.init(character)
+            supportStartPostponedEnterTransition()
+            getData(this)
+        }
 
         detailsViewModel.onBackEvent.observe(this, { onBackPressed() })
 
-        getData(bundle)
     }
 
     /**
@@ -33,8 +41,8 @@ class DetailsActivity : AppCompatActivity() {
      * Check first if the data exists before doing a useless request
      * Use the [bundle] to check whether extras exist or not through a boolean for each extra type
      * */
-    private fun getData(bundle: Bundle?) {
-        bundle?.run {
+    private fun getData(bundle: Bundle) {
+        bundle.run {
             if (containsKey("hasComics") && getBoolean("hasComics"))
                 lifecycleScope.launch {
                     detailsViewModel.getComics(this@DetailsActivity).distinctUntilChanged()

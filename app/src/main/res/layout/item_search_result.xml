@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="civm"
-            type="lobna.extremesolutions.marvel.ui.main.CharacterItemViewModel" />
+            name="srivm"
+            type="lobna.extremesolutions.marvel.ui.search.SearchResultItemViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/margin_padding_size_small"
         android:layout_marginEnd="@dimen/margin_padding_size_medium"
         android:layout_marginBottom="@dimen/margin_padding_size_small"
-        android:onClick="@{civm::onClick}"
+        android:onClick="@{srivm::onClick}"
         app:cardBackgroundColor="@color/black_500"
         app:cardCornerRadius="20dp">
 
@@ -33,7 +33,7 @@
                 app:riv_corner_radius_bottom_left="20dp"
                 app:riv_corner_radius_top_left="20dp"
                 app:riv_mutate_background="true"
-                loadImage:url="@{civm.item.thumbnail.imageUrl}" />
+                loadImage:url="@{srivm.item.thumbnail.imageUrl}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/margin_padding_size_medium"
                 android:layout_marginEnd="@dimen/margin_padding_size_medium"
-                android:text="@{civm.nameObservable}"
+                android:text="@{srivm.nameObservable}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium"
                 android:textStyle="bold" />

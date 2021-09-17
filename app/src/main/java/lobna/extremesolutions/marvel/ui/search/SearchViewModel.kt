@@ -10,6 +10,7 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import lobna.extremesolutions.marvel.data.CharacterModel
+import lobna.extremesolutions.marvel.interfaces.CharacterItemInterface
 import lobna.extremesolutions.marvel.repository.CharactersRepository
 import lobna.extremesolutions.marvel.ui.main.LoaderStateAdapter
 import lobna.extremesolutions.marvel.utils.SingleLiveEvent

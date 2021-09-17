@@ -1,6 +1,7 @@
-package lobna.extremesolutions.marvel.ui.main
+package lobna.extremesolutions.marvel.ui.search
 
 import android.content.Context
+import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
@@ -9,10 +10,12 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import lobna.extremesolutions.marvel.R
 import lobna.extremesolutions.marvel.data.CharacterModel
-import lobna.extremesolutions.marvel.interfaces.CharacterItemInterface
+import lobna.extremesolutions.marvel.ui.details.DetailsActivity
+import lobna.extremesolutions.marvel.utils.IntentClass
 
-class CharacterItemViewModel(
-    val context: Context, val item: CharacterModel, query: String? = null) {
+class SearchResultItemViewModel(
+    val context: Context, val item: CharacterModel, query: String? = null
+) {
 
     val nameObservable = ObservableField<SpannableString>()
 
@@ -30,5 +33,16 @@ class CharacterItemViewModel(
             }
             nameObservable.set(spannable)
         }
+    }
+
+    fun onClick(view: View) {
+        val bundle = Bundle().apply {
+            putParcelable("character", item)
+            putBoolean("hasComics", !(item.comics?.items?.isNullOrEmpty() ?: true))
+            putBoolean("hasEvents", !(item.events?.items?.isNullOrEmpty() ?: true))
+            putBoolean("hasSeries", !(item.series?.items?.isNullOrEmpty() ?: true))
+            putBoolean("hasStories", !(item.stories?.items?.isNullOrEmpty() ?: true))
+        }
+        IntentClass.goToActivity(view.context, DetailsActivity::class.java, bundle)
     }
 }

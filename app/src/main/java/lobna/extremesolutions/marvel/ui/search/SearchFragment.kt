@@ -32,8 +32,6 @@ class SearchFragment : Fragment() {
 
         fragmentSearchBinding.svm = searchViewModel
 
-
-
         searchViewModel.searchEvent.observe(this, { doSearch(it) })
         searchViewModel.cancelEvent.observe(this, { requireActivity().onBackPressed() })
 

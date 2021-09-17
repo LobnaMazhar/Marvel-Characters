@@ -9,12 +9,11 @@ import lobna.extremesolutions.marvel.R
 import lobna.extremesolutions.marvel.data.CharacterModel
 import lobna.extremesolutions.marvel.databinding.ItemSearchResultBinding
 import lobna.extremesolutions.marvel.diffutil.CharactersDiffUtil
-import lobna.extremesolutions.marvel.ui.main.CharacterItemViewModel
 
 class SearchAdapter :
     PagingDataAdapter<CharacterModel, SearchAdapter.SearchViewHolder>(CharactersDiffUtil) {
 
-     var query: String? = null
+    var query: String? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val itemSearchResultBinding: ItemSearchResultBinding = DataBindingUtil.inflate(
@@ -31,8 +30,8 @@ class SearchAdapter :
         RecyclerView.ViewHolder(itemSearchResultBinding.root) {
 
         fun bind(item: CharacterModel) {
-            itemSearchResultBinding.civm =
-                CharacterItemViewModel(itemSearchResultBinding.root.context, item, query)
+            itemSearchResultBinding.srivm =
+                SearchResultItemViewModel(itemSearchResultBinding.root.context, item, query)
         }
     }
 }

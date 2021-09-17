@@ -1,7 +1,6 @@
 package lobna.extremesolutions.marvel.ui.details
 
 import android.content.Context
-import android.os.Bundle
 import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -31,14 +30,11 @@ class DetailsViewModel : ViewModel() {
 
     val onBackEvent = SingleLiveEvent<Boolean>()
 
-    fun init(bundle: Bundle?) {
-        bundle?.run {
-            val character = getParcelable<CharacterModel>("character")
-            character?.run {
-                characterId = id.toString()
-                characterObservable.set(character)
-                descriptionAvailableObservable.set(description.isNotBlank())
-            }
+    fun init(character: CharacterModel?) {
+        character?.run {
+            characterId = id.toString()
+            characterObservable.set(character)
+            descriptionAvailableObservable.set(description.isNotBlank())
         }
     }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import lobna.extremesolutions.marvel.data.CharacterModel
+import lobna.extremesolutions.marvel.interfaces.CharacterItemInterface
 import lobna.extremesolutions.marvel.repository.CharactersRepository
 import lobna.extremesolutions.marvel.utils.SingleLiveEvent
 
@@ -13,8 +14,11 @@ class HomeViewModel : ViewModel() {
 
     val searchEvent = SingleLiveEvent<Boolean>()
 
-    val charactersAdapter = CharactersAdapter().apply {
-        withLoadStateFooter(LoaderStateAdapter())
+    lateinit var characterItemInterface: CharacterItemInterface
+    val charactersAdapter by lazy {
+        CharactersAdapter(characterItemInterface).apply {
+            withLoadStateFooter(LoaderStateAdapter())
+        }
     }
 
     fun getCharacters(context: Context): Flow<PagingData<CharacterModel>> {

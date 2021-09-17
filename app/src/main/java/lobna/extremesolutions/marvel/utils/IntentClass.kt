@@ -3,9 +3,8 @@ package lobna.extremesolutions.marvel.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import androidx.core.app.ActivityOptionsCompat
 
 object IntentClass {
     fun goToActivity(
@@ -17,7 +16,8 @@ object IntentClass {
         exitAnim: Int = -1,
         clear: Boolean = false,
         top: Boolean = false,
-        finish: Boolean = false
+        finish: Boolean = false,
+        options: ActivityOptionsCompat? = null
     ) {
         val intent = Intent(activity, target)
         if (clear)
@@ -26,7 +26,7 @@ object IntentClass {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.putExtra("data", value)
         intent.action = action
-        activity.startActivity(intent)
+        activity.startActivity(intent, options?.toBundle())
         if (enterAnim != -1 && exitAnim != -1)
             activity.overridePendingTransition(enterAnim, exitAnim)
 
