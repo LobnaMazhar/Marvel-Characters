@@ -20,22 +20,44 @@ class DetailsActivity : AppCompatActivity() {
 
         activityDetailsBinding.dvm = detailsViewModel
 
-        detailsViewModel.init(intent.getBundleExtra("data"))
+        val bundle = intent.getBundleExtra("data")
+        detailsViewModel.init(bundle)
 
         detailsViewModel.onBackEvent.observe(this, { onBackPressed() })
 
-        lifecycleScope.launch {
-            detailsViewModel.getComics(this@DetailsActivity).distinctUntilChanged()
-                .collectLatest { detailsViewModel.submitComics(it) }
+        getData(bundle)
+    }
 
-            detailsViewModel.getEvents(this@DetailsActivity).distinctUntilChanged()
-                .collectLatest { detailsViewModel.submitEvents(it) }
+    /**
+     * Get extra data (Comics, Events, Series, Stories) for the character
+     * Check first if the data exists before doing a useless request
+     * Use the [bundle] to check whether extras exist or not through a boolean for each extra type
+     * */
+    private fun getData(bundle: Bundle?) {
+        bundle?.run {
+            if (containsKey("hasComics") && getBoolean("hasComics"))
+                lifecycleScope.launch {
+                    detailsViewModel.getComics(this@DetailsActivity).distinctUntilChanged()
+                        .collectLatest { detailsViewModel.submitComics(it) }
+                }
 
-            detailsViewModel.getSeries(this@DetailsActivity).distinctUntilChanged()
-                .collectLatest { detailsViewModel.submitSeries(it) }
+            if (containsKey("hasEvents") && getBoolean("hasEvents"))
+                lifecycleScope.launch {
+                    detailsViewModel.getEvents(this@DetailsActivity).distinctUntilChanged()
+                        .collectLatest { detailsViewModel.submitEvents(it) }
+                }
 
-            detailsViewModel.getStories(this@DetailsActivity).distinctUntilChanged()
-                .collectLatest { detailsViewModel.submitStories(it) }
+            if (containsKey("hasSeries") && getBoolean("hasSeries"))
+                lifecycleScope.launch {
+                    detailsViewModel.getSeries(this@DetailsActivity).distinctUntilChanged()
+                        .collectLatest { detailsViewModel.submitSeries(it) }
+                }
+
+            if (containsKey("hasStories") && getBoolean("hasStories"))
+                lifecycleScope.launch {
+                    detailsViewModel.getStories(this@DetailsActivity).distinctUntilChanged()
+                        .collectLatest { detailsViewModel.submitStories(it) }
+                }
         }
     }
 }

@@ -36,7 +36,13 @@ class CharacterItemViewModel(
     }
 
     fun onClick(view: View) {
-        val bundle = Bundle().apply { putParcelable("character", item) }
+        val bundle = Bundle().apply {
+            putParcelable("character", item)
+            putBoolean("hasComics", !(item.comics?.items?.isNullOrEmpty() ?: true))
+            putBoolean("hasEvents", !(item.events?.items?.isNullOrEmpty() ?: true))
+            putBoolean("hasSeries", !(item.series?.items?.isNullOrEmpty() ?: true))
+            putBoolean("hasStories", !(item.stories?.items?.isNullOrEmpty() ?: true))
+        }
         IntentClass.goToActivity(view.context, DetailsActivity::class.java, bundle)
     }
 }
