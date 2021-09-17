@@ -17,6 +17,7 @@ interface MarvelApiInterface {
 
     @GET("characters")
     suspend fun characters(
+        @Query("nameStartsWith") name: String? = null,
         @Query("offset") offset: Int = 0,
         @Query("limit") size: Int = PAGE_SIZE,
         @Query("ts") ts: String = Calendar.getInstance().timeInMillis.toString(),

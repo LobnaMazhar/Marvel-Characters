@@ -11,7 +11,8 @@ import lobna.extremesolutions.marvel.data.NetworkResponse
 import lobna.extremesolutions.marvel.network.MyRetrofitClient.PAGE_SIZE
 import lobna.extremesolutions.marvel.repository.CharactersRepository
 
-class CharactersDataSource(private val context: Context) : PagingSource<Int, CharacterModel>() {
+class CharactersDataSource(private val context: Context, val name: String?) :
+    PagingSource<Int, CharacterModel>() {
 
     private val TAG = CharactersDataSource::class.java.simpleName
 
@@ -51,7 +52,7 @@ class CharactersDataSource(private val context: Context) : PagingSource<Int, Cha
     }
 
     private suspend fun makeApiCall(offset: Int): NetworkResponse {
-        Log.d("CharacterList", "Getting Offset :: $offset")
-        return CharactersRepository.getCharacters(offset)
+        Log.d("CharacterList", "Getting $offset for $name")
+        return CharactersRepository.getCharacters(offset, name)
     }
 }

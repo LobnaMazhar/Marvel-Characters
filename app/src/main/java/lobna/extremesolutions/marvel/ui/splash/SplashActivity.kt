@@ -9,7 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import jp.wasabeef.glide.transformations.BlurTransformation
 import lobna.extremesolutions.marvel.R
 import lobna.extremesolutions.marvel.databinding.ActivitySplashBinding
-import lobna.extremesolutions.marvel.ui.main.HomeActivity
+import lobna.extremesolutions.marvel.ui.main.MainActivity
 import lobna.extremesolutions.marvel.utils.IntentClass
 
 class SplashActivity : AppCompatActivity() {
@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
             .into(activitySplashBinding.backgroundImage)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            IntentClass.goToActivity(this, HomeActivity::class.java, clear = true)
+            IntentClass.goToActivity(this, MainActivity::class.java, clear = true)
         }, 3000)
     }
 }

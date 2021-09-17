@@ -22,9 +22,9 @@ object CharactersRepository {
         MyRetrofitClient.createService(MarvelApiInterface::class.java)
     }
 
-    suspend fun getCharacters(offset: Int = 0): NetworkResponse {
+    suspend fun getCharacters(offset: Int = 0, name: String?): NetworkResponse {
         return try {
-            val response = marvelApi.characters(offset)
+            val response = marvelApi.characters(name, offset)
 
             if (response.isSuccessful) {
                 NetworkResponse.DataResponse(response.body())
@@ -37,9 +37,9 @@ object CharactersRepository {
         }
     }
 
-    fun getCharacters(context: Context): Flow<PagingData<CharacterModel>> {
+    fun getCharacters(context: Context, name: String? = null): Flow<PagingData<CharacterModel>> {
         return Pager(PagingConfig(pageSize = PAGE_SIZE)) {
-            CharactersDataSource(context)
+            CharactersDataSource(context, name)
         }.flow
     }
 

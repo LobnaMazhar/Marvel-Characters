@@ -11,11 +11,12 @@
             type="lobna.extremesolutions.marvel.ui.main.HomeViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        tools:context=".ui.main.HomeActivity">
+        android:orientation="vertical"
+        tools:context=".ui.main.HomeFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -38,9 +39,11 @@
                         android:src="@drawable/marvel_logo" />
 
                     <ImageView
+                        android:id="@+id/search_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|end"
+                        android:onClick="@{hvm::search}"
                         android:padding="@dimen/margin_padding_size_medium"
                         android:src="@drawable/ic_search" />
                 </FrameLayout>
@@ -54,7 +57,6 @@
             android:paddingTop="@dimen/margin_padding_size_small"
             android:paddingBottom="@dimen/margin_padding_size_small"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             recycler:adapter="@{hvm.charactersAdapter}" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 </layout>

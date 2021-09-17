@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:recycler="http://schemas.android.com/tools"
+    xmlns:textView="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="svm"
+            type="lobna.extremesolutions.marvel.ui.search.SearchViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical"
+        tools:context=".ui.search.SearchFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentInsetStart="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_padding_size_medium"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_dark_rounded"
+                        android:drawableStart="@drawable/ic_search"
+                        android:drawablePadding="@dimen/title_text_padding"
+                        android:drawableTint="@color/white"
+                        android:padding="@dimen/title_text_padding"
+                        android:src="@drawable/marvel_logo"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_medium"
+                        textView:textWatcher="@{svm.searchTextWatcher}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_padding_size_small"
+                        android:onClick="@{svm::cancel}"
+                        android:padding="@dimen/margin_padding_size_small"
+                        android:text="@string/cancel"
+                        android:textColor="@color/red_200"
+                        android:textSize="@dimen/text_size_small"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/margin_padding_size_small"
+            android:paddingBottom="@dimen/margin_padding_size_small"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            recycler:adapter="@{svm.charactersAdapter}"
+            tools:listitem="@layout/item_search_result" />
+    </LinearLayout>
+</layout>

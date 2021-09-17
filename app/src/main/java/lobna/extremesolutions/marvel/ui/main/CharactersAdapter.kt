@@ -28,7 +28,8 @@ class CharactersAdapter :
         RecyclerView.ViewHolder(itemCharacterBinding.root) {
 
         fun bind(item: CharacterModel) {
-            itemCharacterBinding.civm = CharacterItemViewModel(item)
+            itemCharacterBinding.civm =
+                CharacterItemViewModel(itemCharacterBinding.root.context, item)
         }
     }
 }
