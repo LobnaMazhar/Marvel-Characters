@@ -23,6 +23,7 @@ import lobna.extremesolutions.marvel.databinding.FragmentHomeBinding
 import lobna.extremesolutions.marvel.interfaces.CharacterItemInterface
 import lobna.extremesolutions.marvel.ui.details.DetailsActivity
 import lobna.extremesolutions.marvel.utils.IntentClass
+import lobna.extremesolutions.marvel.utils.setupParallaxScrollListener
 
 class HomeFragment : Fragment() {
 
@@ -66,6 +67,7 @@ class HomeFragment : Fragment() {
             homeViewModel.getCharacters(requireContext()).distinctUntilChanged()
                 .collectLatest { homeViewModel.submitData(it) }
         }
+        fragmentHomeBinding.charactersRecycler.setupParallaxScrollListener()
 
         homeViewModel.searchEvent.observe(this,
             { findNavController().navigate(HomeFragmentDirections.homeToSearch()) })

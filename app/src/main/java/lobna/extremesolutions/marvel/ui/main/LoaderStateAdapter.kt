@@ -1,8 +1,8 @@
 package lobna.extremesolutions.marvel.ui.main
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
@@ -23,12 +23,11 @@ class LoaderStateAdapter : LoadStateAdapter<LoaderStateAdapter.LoaderViewHolder>
         holder.bind(loadState)
     }
 
-    class LoaderViewHolder(private val itemLoadingBinding: ItemLoadingBinding) :
+    inner class LoaderViewHolder(private val itemLoadingBinding: ItemLoadingBinding) :
         RecyclerView.ViewHolder(itemLoadingBinding.root) {
 
         fun bind(loadState: LoadState) {
-            itemLoadingBinding.marvelLoading.visibility =
-                if (loadState is LoadState.Loading) View.VISIBLE else View.GONE
+            itemLoadingBinding.marvelLoading.isVisible = loadState is LoadState.Loading
         }
     }
 }
