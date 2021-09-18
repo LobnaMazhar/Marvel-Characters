@@ -6,7 +6,7 @@ import lobna.extremesolutions.marvel.interfaces.CharacterExtraItemInterface
 
 class CharacterExtrasItemViewModel(
     val item: CharacterExtrasItemResourcesModel,
-    val characterExtraItemInterface: CharacterExtraItemInterface
+    private val characterExtraItemInterface: CharacterExtraItemInterface
 ) {
 
     fun clickItem(view: View) {

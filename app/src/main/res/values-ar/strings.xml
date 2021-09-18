@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">شخصيات مارفل</string>
+    <string name="description">الوصف</string>
+    <string name="comics">الكومكس</string>
+    <string name="events">الاحداث</string>
+    <string name="series">الحلقات</string>
+    <string name="stories">القصص</string>
+    <string name="cancel">إلغاء</string>
+</resources>
