@@ -201,5 +201,22 @@
                     tools:listitem="@layout/item_character_extras" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF"
+            android:visibility="@{dvm.showExtraOverlayViewObservable ? View.VISIBLE : View.GONE, default=gone}"
+            loadImage:url="@{dvm.extraItemObservable.thumbnail.imageUrl}" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/margin_padding_size_medium"
+            android:layout_marginEnd="@dimen/margin_padding_size_medium"
+            android:onClick="@{dvm::onBackClick}"
+            android:src="@drawable/ic_close"
+            android:visibility="@{dvm.showExtraOverlayViewObservable ? View.VISIBLE : View.GONE, default=gone}" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

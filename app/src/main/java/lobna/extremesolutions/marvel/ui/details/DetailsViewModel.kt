@@ -9,10 +9,11 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import lobna.extremesolutions.marvel.data.CharacterExtrasItemResourcesModel
 import lobna.extremesolutions.marvel.data.CharacterModel
+import lobna.extremesolutions.marvel.interfaces.CharacterExtraItemInterface
 import lobna.extremesolutions.marvel.repository.CharactersRepository
 import lobna.extremesolutions.marvel.utils.SingleLiveEvent
 
-class DetailsViewModel : ViewModel() {
+class DetailsViewModel : ViewModel(), CharacterExtraItemInterface {
 
     private lateinit var characterId: String
 
@@ -22,11 +23,13 @@ class DetailsViewModel : ViewModel() {
     val eventsAvailableObservable = ObservableBoolean(false)
     val seriesAvailableObservable = ObservableBoolean(false)
     val storiesAvailableObservable = ObservableBoolean(false)
+    val showExtraOverlayViewObservable = ObservableBoolean(false)
+    val extraItemObservable = ObservableField<CharacterExtrasItemResourcesModel>()
 
-    val comicsAdapter = CharacterExtrasAdapter()
-    val eventsAdapter = CharacterExtrasAdapter()
-    val seriesAdapter = CharacterExtrasAdapter()
-    val storiesAdapter = CharacterExtrasAdapter()
+    val comicsAdapter = CharacterExtrasAdapter(this)
+    val eventsAdapter = CharacterExtrasAdapter(this)
+    val seriesAdapter = CharacterExtrasAdapter(this)
+    val storiesAdapter = CharacterExtrasAdapter(this)
 
     val onBackEvent = SingleLiveEvent<Boolean>()
 
@@ -76,5 +79,10 @@ class DetailsViewModel : ViewModel() {
     suspend fun submitStories(it: PagingData<CharacterExtrasItemResourcesModel>) {
         storiesAvailableObservable.set(true)
         storiesAdapter.submitData(it)
+    }
+
+    override fun onItemClick(item: CharacterExtrasItemResourcesModel) {
+        extraItemObservable.set(item)
+        showExtraOverlayViewObservable.set(true)
     }
 }

@@ -9,8 +9,9 @@ import lobna.extremesolutions.marvel.R
 import lobna.extremesolutions.marvel.data.CharacterExtrasItemResourcesModel
 import lobna.extremesolutions.marvel.databinding.ItemCharacterExtrasBinding
 import lobna.extremesolutions.marvel.diffutil.CharacterExtrasDiffUtil
+import lobna.extremesolutions.marvel.interfaces.CharacterExtraItemInterface
 
-class CharacterExtrasAdapter :
+class CharacterExtrasAdapter(val characterExtraItemInterface: CharacterExtraItemInterface) :
     PagingDataAdapter<CharacterExtrasItemResourcesModel, CharacterExtrasAdapter.CharacterExtrasViewHolder>(
         CharacterExtrasDiffUtil
     ) {
@@ -30,7 +31,8 @@ class CharacterExtrasAdapter :
         RecyclerView.ViewHolder(itemCharacterExtrasBinding.root) {
 
         fun bind(item: CharacterExtrasItemResourcesModel) {
-            itemCharacterExtrasBinding.civm = CharacterExtrasItemViewModel(item)
+            itemCharacterExtrasBinding.civm =
+                CharacterExtrasItemViewModel(item, characterExtraItemInterface)
         }
     }
 }

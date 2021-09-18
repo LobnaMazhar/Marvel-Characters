@@ -33,7 +33,6 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         detailsViewModel.onBackEvent.observe(this, { onBackPressed() })
-
     }
 
     /**
@@ -67,5 +66,11 @@ class DetailsActivity : AppCompatActivity() {
                         .collectLatest { detailsViewModel.submitStories(it) }
                 }
         }
+    }
+
+    override fun onBackPressed() {
+        if (detailsViewModel.showExtraOverlayViewObservable.get())
+            detailsViewModel.showExtraOverlayViewObservable.set(false)
+        else super.onBackPressed()
     }
 }
